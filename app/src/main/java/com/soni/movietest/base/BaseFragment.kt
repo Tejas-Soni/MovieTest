@@ -37,6 +37,8 @@ abstract class BaseFragment(@LayoutRes layout :Int) : Fragment(layout),Coroutine
     var navigation: BaseActivity? = null
     var rootView: View? = null
     val job = Job()
+    private lateinit var baseViewModel: BaseViewModel
+
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
@@ -165,5 +167,25 @@ abstract class BaseFragment(@LayoutRes layout :Int) : Fragment(layout),Coroutine
 
     fun hideDialog() {
         if (dialog!!.isShowing) dialog!!.dismiss()
+    }
+
+    fun setBaseViewModel(viewModel: BaseViewModel) {
+        this.baseViewModel = viewModel
+//        baseViewModel.errorMessage.observe(this, Observer { errorMessage ->
+//            if (errorMessage != null) showError(errorMessage) else hideError()
+//        })
+//        baseViewModel.loginActiveMessage.observe(this, Observer { errorMessage ->
+//            if (errorMessage != null) {
+//                showAlert(errorMessage)
+//                baseViewModel.loginActiveMessage.value = null
+//            }
+//        })
+//        baseViewModel.loadingVisibility.observe(this, Observer {
+//            if (it) {
+//                context?.let(ProgressDialogUtil::showProgressDialog)
+//            } else {
+//                ProgressDialogUtil.hideProgressDialog()
+//            }
+//        })
     }
 }
